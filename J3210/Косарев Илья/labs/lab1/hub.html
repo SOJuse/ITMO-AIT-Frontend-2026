@@ -87,13 +87,15 @@
                 </section>
 
                 <section class="mb-3">
+                    <form id="hubSearchForm">
                     <div class="input-group input-group-lg rounded" id="hubSearchBar">
                         <span class="input-group-text bg-white border-end-0 text-muted">
                             <i class="bi bi-search"></i>
                         </span>
-                        <input type="text" class="form-control border-start-0 ps-0" id="searchInput" name="searchQuery" placeholder="Поиск по названию, задаче или фреймворку...">
-                        <button class="btn bg-primary text-white px-4" id="searchButton" type="button">Найти</button>
+                        <input type="text" class="form-control border-start-0 ps-0" id="searchInput" name="searchQuery" placeholder="Поиск по названию, задаче или фреймворку..." autocomplete="off">
+                        <button class="btn bg-primary text-white px-4" id="searchButton" type="submit">Найти</button>
                     </div>
+                    </form>
                 </section>
 
                 <section class="d-flex align-items-center gap-2 mb-4 overflow-x-auto pb-2 flex-nowrap" id="activeFiltersBar">
@@ -319,7 +321,7 @@
             
             <div class="modal-footer border-top bg-light">
                 <button type="reset" class="btn btn-outline-secondary" id="resetFilters" form="filtersForm" data-bs-dismiss="modal">Сбросить</button>
-                <button type="button" class="btn bg-primary text-white" id="applyFilters" data-bs-dismiss="modal">Применить фильтры</button>
+                <button type="button" class="btn bg-primary text-white" id="applyFilters" data-action="apply-filters" data-bs-dismiss="modal">Применить фильтры</button>
             </div>
         </div>
     </div>

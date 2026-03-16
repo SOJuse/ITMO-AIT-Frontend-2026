@@ -108,29 +108,29 @@
                     </div>
 
                     <div class="d-flex flex-wrap gap-2">
-                        <button class="btn btn-outline-secondary d-flex align-items-center gap-2 rounded-pill fw-normal">
+                        <button class="btn btn-outline-secondary d-flex align-items-center gap-2 rounded-pill fw-normal" id="datasetStarButton" type="button">
                             <i class="bi bi-star"></i> Star
                             <span class="badge bg-secondary rounded-pill">3,105</span>
                         </button>
                         
-                        <button class="btn btn-outline-secondary d-flex align-items-center gap-2 rounded-pill fw-normal">
+                        <button class="btn btn-outline-secondary d-flex align-items-center gap-2 rounded-pill fw-normal" id="datasetForkButton" type="button" >
                             <i class="bi bi-diagram-2"></i> Fork
                             <span class="badge bg-secondary rounded-pill">395</span>
                         </button>
 
-                        <button class="btn bg-primary text-white d-flex align-items-center gap-2 rounded-pill fw-normal" data-bs-toggle="modal" data-bs-target="#useCodeModal">
+                        <button class="btn bg-primary text-white d-flex align-items-center gap-2 rounded-pill fw-normal" id="openUseDatasetCodeModalButton" type="button" data-bs-toggle="modal" data-bs-target="#useCodeModal">
                             <i class="bi bi-code-slash"></i> Use Dataset
                         </button>
 
                         <div class="dropdown">
-                            <button class="btn btn-outline-secondary rounded-circle" type="button" data-bs-toggle="dropdown">
+                            <button class="btn btn-outline-secondary rounded-circle" id="datasetActionsMenuButton" type="button" data-bs-toggle="dropdown">
                                 <i class="bi bi-three-dots"></i>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-bookmark me-2"></i>Добавить в Bookmarks</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-share me-2"></i>Поделиться</a></li>
+                            <ul class="dropdown-menu" id="datasetActionsMenu">
+                                <li><button class="dropdown-item" id="bookmarkDatasetButton" type="button"><i class="bi bi-bookmark me-2"></i>Добавить в Bookmarks</button></li>
+                                <li><button class="dropdown-item" id="shareDatasetButton" type="button"><i class="bi bi-share me-2"></i>Поделиться</button></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-flag me-2"></i>Пожаловаться</a></li>
+                                <li><button class="dropdown-item text-danger" id="reportDatasetButton" type="button"><i class="bi bi-flag me-2"></i>Пожаловаться</button></li>
                             </ul>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                             <h4 class="fw-bold mt-4 mb-3">Пример использования</h4>
                             <p>Вы можете легко загрузить аннотации датасета с помощью библиотеки <code>pandas</code> для просмотра метаданных изображений.</p>
                             
-                            <pre class="code-inline-block"><code>import pandas as pd
+                            <pre class="code-inline-block" id="datasetUsageExampleCode"><code>import pandas as pd
 import json
 
 # Загружаем JSON аннотации
@@ -211,18 +211,18 @@ print(df.head())</code></pre>
                         <div class="tab-pane fade" id="discussions" role="tabpanel">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="fw-bold">Обсуждения</h4>
-                                <button class="btn bg-primary text-white">Создать тему</button>
+                                <button class="btn bg-primary text-white" id="createDatasetDiscussionButton" type="button">Создать тему</button>
                             </div>
                             
-                            <ul class="list-group list-group-flush">
-                                <li href="#" class="list-group-item list-group-item-action py-3">
+                            <ul class="list-group list-group-flush" id="datasetDiscussionsList">
+                                <li class="list-group-item py-3">
                                     <div class="d-flex justify-content-between">
                                         <h6 class="mb-1 fw-bold">Missing images in val2017 archive?</h6>
                                         <small class="text-muted">3 дня назад</small>
                                     </div>
                                     <p class="mb-1">Скачал архив валидации, но не могу найти несколько изображений, которые числятся в файле аннотаций JSON...</p>
                                 </li>
-                                <li href="#" class="list-group-item list-group-item-action py-3">
+                                <li class="list-group-item py-3">
                                     <div class="d-flex justify-content-between">
                                         <h6 class="mb-1 fw-bold">Commercial use under CC BY 4.0</h6>
                                         <small class="text-muted">Неделю назад</small>
@@ -244,7 +244,7 @@ print(df.head())</code></pre>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="datasetArtifactsList">
                                     <tr>
                                         <td><i class="bi bi-file-earmark-zip text-muted me-2"></i> train2017.zip</td>
                                         <td>18.0 GB</td>
@@ -285,12 +285,12 @@ print(df.head())</code></pre>
                 
                 <div class="modal-body p-4">
 
-                    <select class="form-select mb-4 fw-semibold border-secondary">
+                    <select class="form-select mb-4 fw-semibold border-secondary" id="datasetRuntimeSelect">
                         <option value="python" selected>Python (pandas)</option>
                         <option value="pytorch">Python (HuggingFace datasets)</option>
                         <option value="cli">Command Line (wget)</option>
                     </select>
-                        <pre class="code-inline-block"><code>import pandas as pd
+                        <pre class="code-inline-block" id="datasetUseCodeSnippet"><code>import pandas as pd
 import json
 
 # Чтение JSON файла аннотаций

@@ -41,7 +41,7 @@
     </header>
 
     <div class="container-fluid">
-        <li class="row">
+        <div class="row" id="subscriptionsLayoutRow">
             
             <aside class="col-md-3 col-lg-2 p-0 border-end" id="sidebarMenuWrapper">
                 <div class="offcanvas-md offcanvas-start" id="sidebarMenu">
@@ -88,19 +88,19 @@
                 </p>
             </section>
 
-            <section class="mb-4">
-                <div class="input-group input-group-lg rounded subscriptions-search-group">
+            <section class="mb-4" id="subscriptionsSearchSection">
+                <div class="input-group input-group-lg rounded subscriptions-search-group" id="subscriptionsSearchBar">
                     <span class="input-group-text bg-white border-end-0 text-muted">
                         <i class="bi bi-search"></i>
                     </span>
-                    <input type="text" class="form-control border-start-0 ps-0" placeholder="Поиск по имени или @username...">
+                    <input type="text" class="form-control border-start-0 ps-0" id="subscriptionsSearchInput" placeholder="Поиск по имени или @username..." autocomplete="off">
                 </div>
             </section>
 
             <section id="subscriptionsSection">
-                <h5 class="mb-3 text-muted">Вы подписаны на 3 аккаунта</h5>
+                <h5 class="mb-3 text-muted" id="subscriptionsCount">Вы подписаны на 3 аккаунта</h5>
                 
-                <ul class="list-group rounded-3">
+                <ul class="list-group rounded-3" id="subscriptionsList">
 
                     <li class="list-group-item d-flex flex-column flex-lg-row justify-content-between align-items-lg-center">
                         

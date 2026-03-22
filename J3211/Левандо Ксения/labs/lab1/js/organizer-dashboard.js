@@ -175,11 +175,21 @@ createForm.onsubmit = async function(e) {
 
 
 async function deleteEvent(id) {
-    if (!confirm("Are you sure you want to delete this event?")) return;
-    await fetch(`http://localhost:3000/events/${id}`, {
-        method: "DELETE"
-    });
-    loadEvents();
+    showConfirmModal(
+        "Refund ticket",
+        "Are you sure you want to delete this event?",
+        async () => {
+            try {
+                await fetch(`http://localhost:3000/events/${id}`, {
+                method: "DELETE"
+            });
+            loadEvents();
+        } catch (error) {
+            console.error("Refund error:", error);
+            showModal("Error", "Failed to delete event", "danger");
+        }
+    }
+);
 }
 
 
@@ -191,11 +201,31 @@ async function viewSales(eventId) {
         showModal("Info", "No tickets sold yet for this event", "info");
         return;
     }
-    const list = soldTickets
-        .map(t => `${t.owner} - ${t.category}`)
-        .join("\n");
-
-    showModal("Info", `Sold tickets:\n${list}`, "info");
+    const rows = soldTickets
+    .map(t => `
+        <tr>
+            <td>${t.owner}</td>
+            <td>${t.category}</td>
+        </tr>
+    `)
+    .join("");
+    showModal(
+        "Sold tickets",
+        `
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${rows}
+            </tbody>
+        </table>
+        `,
+        "info"
+    );
 }
 
 // Logout
@@ -210,7 +240,7 @@ function showModal(title, message, type = "primary") {
     const modalEl = document.getElementById("appModal");
 
     document.getElementById("appModalTitle").textContent = title;
-    document.getElementById("appModalBody").textContent = message;
+    document.getElementById("appModalBody").innerHTML = message;
 
     const header = modalEl.querySelector(".modal-header");
     header.className = "modal-header";
@@ -221,5 +251,22 @@ function showModal(title, message, type = "primary") {
     if (type === "info") header.classList.add("bg-info", "text-white");
 
     const modal = new bootstrap.Modal(modalEl);
+    modal.show();
+}
+
+function showConfirmModal(title, message, onConfirm) {
+    document.getElementById("confirmTitle").textContent = title;
+    document.getElementById("confirmMessage").textContent = message;
+
+    const confirmBtn = document.getElementById("confirmActionBtn");
+
+    confirmBtn.onclick = null;
+
+    confirmBtn.onclick = () => {
+        onConfirm();
+        bootstrap.Modal.getInstance(document.getElementById("confirmModal")).hide();
+    };
+
+    const modal = new bootstrap.Modal(document.getElementById("confirmModal"));
     modal.show();
 }

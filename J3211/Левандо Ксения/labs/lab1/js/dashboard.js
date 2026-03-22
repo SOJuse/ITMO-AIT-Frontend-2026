@@ -52,25 +52,45 @@ function renderTickets(tickets) {
 
 // ticket refunding
 async function refundTicket(id) {
-    const confirmRefund = confirm("Are you sure you want to refund this ticket?");
-    if (!confirmRefund) return;
+    showConfirmModal(
+        "Refund ticket",
+        "Are you sure you want to refund this ticket?",
+        async () => {
+            try {
+                await fetch(`http://localhost:3000/tickets/${id}`, {
+                    method: "DELETE"
+                });
 
-    try {
-        await fetch(`http://localhost:3000/tickets/${id}`, {
-            method: "DELETE"
-        });
-
-        loadTickets(); // обновляем список
-    } catch (error) {
-        console.error("Refund error:", error);
-        alert("Failed to refund ticket");
-    }
+                loadTickets();
+            } catch (error) {
+                console.error("Refund error:", error);
+                showModal("Error", "Failed to refund ticket", "danger");
+            }
+        }
+    );
 }
 
 function logout() {
     localStorage.removeItem("auth");
     localStorage.removeItem("user");
     window.location.href = "index.html";
+}
+
+function showConfirmModal(title, message, onConfirm) {
+    document.getElementById("confirmTitle").textContent = title;
+    document.getElementById("confirmMessage").textContent = message;
+
+    const confirmBtn = document.getElementById("confirmActionBtn");
+
+    confirmBtn.onclick = null;
+
+    confirmBtn.onclick = () => {
+        onConfirm();
+        bootstrap.Modal.getInstance(document.getElementById("confirmModal")).hide();
+    };
+
+    const modal = new bootstrap.Modal(document.getElementById("confirmModal"));
+    modal.show();
 }
 
 loadTickets();

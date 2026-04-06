@@ -9,7 +9,7 @@
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" aria-label="Основная навигация">
   <div class="container">
     <a class="navbar-brand brand-name" href="dashboard.html">a<span>Nikral</span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
@@ -32,7 +32,7 @@
 
   <div class="card mb-4">
     <div class="card-body">
-      <form>
+      <form aria-label="Фильтрация транзакций">
         <div class="row g-3">
           <div class="col-md-5">
             <label class="form-label" for="filter-query">Поиск</label>
@@ -61,13 +61,13 @@
 
   <div class="card">
     <div class="table-responsive">
-      <table class="table mb-0">
+      <table class="table mb-0" aria-label="Список транзакций">
         <thead class="table-light">
           <tr>
-            <th>Описание</th>
-            <th>Категория</th>
-            <th>Дата</th>
-            <th class="text-end">Сумма</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Категория</th>
+            <th scope="col">Дата</th>
+            <th scope="col" class="text-end">Сумма</th>
           </tr>
         </thead>
         <tbody>
